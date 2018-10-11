@@ -11,7 +11,7 @@
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[12pt]{report}
+\documentclass[12pt]{article}
 \usepackage[a4paper]{geometry}
 \usepackage[myheadings]{fullpage}
 \usepackage{fancyhdr}
@@ -72,6 +72,7 @@
 
 \maketitle
 \renewcommand{\contentsname}{Sommaire}
+\newpage
 \tableofcontents
 \newpage
 
@@ -83,8 +84,7 @@
 %-------------------------------------------------------------------------------
 % BODY
 %-------------------------------------------------------------------------------
-
-\part*{Modélisation du Problème}
+\part{Modélisation du Problème}
 
 L'objectif de ce projet est de trouver une modélisation du problème de défense d'un but lors de la RoboCup. Ce problème consiste à trouver une manière optimale de placer les défenseurs par rapports à l'emplacement de leur but et des attaquants.
 
@@ -93,7 +93,7 @@ Ce document présente les premières idées de modélisation que nous avons apr�
 Voici comment nous modélisons le problème :
 \newline
 \newline
-\chapter{Entrées}
+\section{Entrées}
 Les entrées de notre problème sont les informations qui nous intéressent sur nos robots et le terrain. Elles nous permettront de simuler la réalité dans nos algorithmes afin que nos résultats aient un sens concret.\\
 
 Soient :
@@ -104,7 +104,7 @@ Soient :
 \item $pos_{step}$, $X_{max}$, $Y_{max}$, Pas de discrétisation pour les positions sur le terrain, Abscisse  maximale et Ordonnée maximale. On considérera qu'un robot est en position $(x, y) \in (N \times N)$ si il est en position ($x \times pos_{step}$, $y \times pos_{step}$).
 \end{itemize}
 
-\chapter{Fonctions nécessaires}
+\section{Fonctions nécessaires}
 \begin{itemize}
 \item $cadre(x, y, k)$ ($x, y, k \in N$) Fonction qui renvoie vrai si le tir d'un attaquant aux coordonnées $(x, y)$ d'angle $k$ est bien cadré et faux sinon.
 \item $interception(x, y, k, x', y')$ Fonction qui renvoie vrai si le tir d'un attaquant en (x, y) d'angle k est arrêté par un défenseur en (x', y') et faux sinon.
@@ -112,7 +112,7 @@ Soient :
 \space
 \space
 
-\chapter{Graphe} \bigbreak
+\section{Graphe} \bigbreak
 On crée le graphe G suivant :\\
 \begin{figure}[H]
 	\centering
@@ -163,22 +163,22 @@ On crée le graphe G suivant :\\
 	}
 \caption{Exemple de modélisation avec 3 tirs possibles: ici \{($x_3,y_3$), ($x_5,y_5$)\} est une solution.}
 \end{figure}
-\section{Sommets attaquants}
+\subsection{Sommets attaquants}
 $\forall i \in \{1, ..., n\}$, $\forall k \in \{0, ..., K_{max} \}$
 
 Si $cadre(o_i.x, o_i.y, k)$ est vrai : on ajoute un sommet au graphe d'étiquette (i, k) qui représente un tir possible de l'attaquant $o_i$. \bigbreak
 
-\section{Sommets défenseurs}
+\subsection{Sommets défenseurs}
 $\forall x \in \{1, ..., X_{max}\}$ $\forall y \in \{1, ..., Y_{max}\}$ 
 
 Pour tout sommet d'étiquette (i, k) tel que $intercepte(o_i.x, o_i.y, k, x, y)$ : On crée un sommet d'étiquette (x, y) qui représente un défenseur placé en (x, y) si ce sommet n'existe pas déjà et on ajoute une arête entre $(i, k)$ et $(x, y)$ qui représente le fait qu'un défenseur placé en $(x, y)$ arrêterai le tir $(i, k)$.
 
-\chapter{Solution du problème}
+\section{Solution du problème}
 Une solution du problème est un ensemble de taille minimal de sommets défenseurs qui domine l'ensemble des sommets attaquants.
 Pour trouver cet ensemble on peut essayer avec 1, puis 2, puis 3, etc. On sait qu'on pourra toujours trouver un ensemble de taille n (nombre d'attaquants) car un défenseur est capable de bloquer tous les tirs d'un attaquant en se plaçant suffisamment proche de lui. 
 
-\chapter{Extensions}
-\section{Gestion des collisions}
+\section{Extensions}
+\subsection{Gestion des collisions}
 Si on veut éviter d'avoir des robots qui rentrent en collision, on peut ajouter une arête entre chaque paire de sommets défenseurs pour lesquels avoir un défenseur sur chacune des positions causerai une collision. Une solution du problème qui évite les collisions doit alors avoir comme condition supplémentaire d'être un ensemble de sommets stable.\\
 Le graphe du problème devient alors:\\ \bigbreak
 \begin{figure}[H]
