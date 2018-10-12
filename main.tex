@@ -26,6 +26,7 @@
 \usepackage{url}
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
+\usepackage{varioref}
 \usepackage {tikz}
 \usepackage{float}
 \usetikzlibrary {positioning}
@@ -96,7 +97,7 @@ Soient :
 \begin{itemize}
 \item $o_i \in O$ ($i \in \{1,..., n\}$) Les $n$ adversaires. On notera $o_i.x$ et $o_i.y$ les coordonnées de $o_i$.
 \item $d_i \in D$ ($i \in \{1,..., k\}$) Les $m$ défenseurs.
-\item $\theta_{step}$ Pas de discrétisation pour les angles de tirs. On considérera "l'angle $k$" comme étant un angle de mesure $k \times \theta_{step}$ radians. On nommera $K_{max}$ le k maximum tel que $k \times \theta_{step} $<$ 2 \pi$.
+\item $\theta_{step}$ Pas de discrétisation pour les angles de tirs. On considérera "l'angle $k$" comme étant un angle de mesure $k \cdot \theta_{step}$ radians. On nommera $K_{max}$ le plus grand angle possible, c'est à dire :  $\left \lfloor{\frac{2\cdot p \cdot i }{\theta_{step}}}\right \rfloor $
 \item $pos_{step}$, $X_{max}$, $Y_{max}$, Pas de discrétisation pour les positions sur le terrain, Abscisse  maximale et Ordonnée maximale. On considérera qu'un robot est en position $(x, y) \in (N \times N)$ si il est en position ($x \times pos_{step}$, $y \times pos_{step}$).
 \end{itemize}
 
@@ -179,12 +180,19 @@ $\forall x \in \{1, ..., X_{max}\}$ $\forall y \in \{1, ..., Y_{max}\}$
 Pour tout sommet d'étiquette (i, k) tel que $interception(o_i.x, o_i.y, k, x, y)$ : On crée un sommet d'étiquette (x, y) qui représente un défenseur placé en (x, y) si ce sommet n'existe pas déjà et on ajoute une arête entre $(i, k)$ et $(x, y)$ qui représente le fait qu'un défenseur placé en $(x, y)$ arrêterai le tir $(i, k)$.
 
 \section{Solution du problème}
-Une solution du problème est un ensemble de taille minimale de sommets de position qui domine l'ensemble des sommets de tir.
+Une solution du problème est un ensemble de taille minimale de sommets de position qui domine(\ref{def:ensemble_dominant}) l'ensemble des sommets de tir . Ceci est effectivement une solution car pour tout sommet de tir on a dans l'ensemble dominant un sommet de position adjacent. En plaçant un défenseur sur chacune des positions dans l'ensemble dominant, tous les tirs possibles des attaquants seront bloqués.
+
 Comme nous sommes limités à 6 robots, nous chercherons des ensemble dominant de tailles entre 1 et 6.
 
 \section{Extensions}
-\subsection{Gestion des collisions}
-Si on veut éviter d'avoir des robots qui rentrent en collision, on peut ajouter une arête entre chaque paire de sommets défenseurs pour lesquels avoir un défenseur sur chacune des positions causerait une collision. Une solution du problème qui évite les collisions doit alors avoir comme condition supplémentaire d'être un ensemble de sommets stable.\\
+\subsection{Plusieurs buts}
+Avec plus de buts, il y a plus de tirs bien cadrés possibles. Cela augmente donc juste le nombre de sommets de tirs. Il suffit de modifier la fonction $cadre()$ pour gérer cette extension.
+
+\subsection{Position initiale des défenseurs}
+Une solution possible pour modéliser cette extension est de À COMPLÉTER
+
+\subsection{Distance minimale entre les robots}
+Si on veut éviter d'avoir des robots qui rentrent en collision, on peut ajouter une arête entre chaque paire de sommets de position qui ont des positions inférieures à une certaine distance. Une solution du problème doit alors avoir comme condition supplémentaire d'être un ensemble de sommets stable(\ref{def:ensemble_de_sommets_stable}).\\
 Le graphe du problème devient alors:\\ \bigbreak
 \begin{figure}[H]
 	\centering
@@ -241,6 +249,24 @@ Le graphe du problème devient alors:\\ \bigbreak
 	\caption{Modélisation des collisions: les arêtes représentant les collisions sont en rouge, ici, \{($x_3,y_3$), ($x_5,y_5$)\} n'est plus solution, car ils sont adjacents; par contre \{($x_3,y_3$), ($x_0,y_0$)\} est une solution.}
 \end{figure}
 
+\subsection{Gardien}
+Pour modéliser le fait qu'une zone du terrain est réservée à un gardien, on divise les sommets de position en deux : Les sommets de positions terrain et les sommets de position surface de réparation. Une solution du problème deviendra donc un ensemble composés de sommets de positions terrain et d'un seul sommet de position surface de réparation qui domine les sommets de tirs.
+
+\subsection{Trajectoires courbes}
+Pour prendre en compte les trajectoires courbes, il suffit de modifier la fonction $interception()$. Cette extension augmentera juste le nombre d'arêtes entre les sommets de tirs et les sommets de position.
+
+\begin{appendix}
+\section{Définitions}
+\subsection{Ensemble dominant}
+\label{def:ensemble_dominant}
+Un ensemble dominant d'un graphe $G(V, E)$ est un sous ensemble $D \subseteq V$ de sommets tel que tout sommet de $G$ est soit dans $D$ soit adjacent à un sommet de $D$.
+\subsection{Nombre de domination}
+\label{def:nombre_de_domination}
+Le nombre de domination $\gamma(G)$ d'un graphe $G$ est le cardinal d'un plus petit ensemble dominant de $G$.
+\subsection{Ensemble de sommets stable}
+\label{def:ensemble_de_sommets_stable}
+Soit $G(V, E)$ un graphe, un sous-ensemble $S \subseteq V$ de sommets est stable si aucune de paire de sommets dans $S$ n'est reliée par une arête de $G$.
+\end{appendix}
 
 %-------------------------------------------------------------------------------
 % REFERENCES
