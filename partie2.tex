@@ -1,8 +1,32 @@
 \part{Résolution du problème}
 
-On a désormais un graphe dont on veut dominer un sous-ensemble de sommets à l'aide des sommets d'un autre sous-ensemble. Pour résoudre ce problème nous avons utilisé les trois approches suivantes :
+On a désormais un graphe dont on veut dominer les sommets de tir à l'aide des sommets de position. Pour résoudre ce problème nous avons utilisé les trois approches suivantes :
 
 \section{Force brute}
+
+La premier algorithme que nous avons implémenté est un algorithme de force brute. L'idée est d'essayer exhaustivement tous les sous-ensembles possibles de sommets défenseurs pour en trouver un de taille minimale qui domine les sommets de position. Pour être certain de trouver un sous-ensemble de taille minimale, on commence par essayer tous les sous-ensembles de taille 0, puis 1, puis 2, jusqu'à 6. Si on ne trouve pas d'ensemble dominant durant ce procédé c'est qu'il n'existe pas de solution au problème.
+
+\vspace{2\baselineskip}
+
+\fbox{\begin{minipage}{0.9\textwidth}
+    \centerline{\textbf{Force Brute}}\vspace{\baselineskip}
+    
+    \textbf{Entrées : }$G = (V = V_t \cup V_p, E)$
+    
+    \textbf{Sortie : }Un ensemble $D \in V_t$ de taille minimale qui domine $V_t$ ou FAUX si un tel ensemble de taille inférieure à 7 n'existe pas. \vspace{\baselineskip}
+    
+    \textbf{Algorithme :}
+    
+    \textbf{Pour} $i$ allant de $0$ à $6$ :
+    
+    \qquad \textbf{Pour} tout $D \in V_p$ avec $|D| = i$ :
+    
+    \qquad\qquad \textbf{Si} $D$ domine $V_t$ : \textbf{Renvoyer} D \vspace{\baselineskip}
+    
+    \textbf{Renvoyer} FAUX
+\end{minipage}}
+
+
 
 \section{Méthode gloutonne}
 
