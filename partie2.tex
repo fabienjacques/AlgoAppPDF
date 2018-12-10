@@ -26,8 +26,56 @@ La premier algorithme que nous avons implémenté est un algorithme de force bru
     \textbf{Renvoyer} FAUX
 \end{minipage}}
 
+Cet algorithme a une complexité exponentielle pour le nombre de sommets du graphes. En effet, le nombre de sous-ensembles de taille $k$ d'un ensemble à $n$ éléments est exponentiel en $n$.
+
+\subsection{Distance minimale entre les robots}
+
+\subsection{Gardien}
+
+\subsection{Position initiale des défenseurs}
+
 
 
 \section{Méthode gloutonne}
 
+Avec cette méthode il est possible d'obtenir une solution avec un nombre de défenseur raisonnablement petit (mais pas minimal) en temps polynomial.
+
+\vspace{2\baselineskip}
+
+\fbox{\begin{minipage}{0.9\textwidth}
+    \centerline{\textbf{Force Brute}}\vspace{\baselineskip}
+    
+    \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
+    
+    \textbf{Sortie : }Un ensemble $D \in V_p$ qui domine $V_t$ ou FAUX si l'algorithme n'arrive pas à trouver un tel ensemble de taille inférieure à 7. \vspace{\baselineskip}
+    
+    \textbf{Algorithme :}
+    
+    Construire une copie $G'$ de $G$
+    
+    \textbf{Pour} $i$ allant de $0$ à $6$ :
+    
+    \qquad Choisir un sommet $v \in V_p$ de degré maximal dans $G'$
+    
+    \qquad Supprimer de $G'$ $v$ et tous les sommets de tir reliés à $v$ 
+    
+    \qquad Ajouter $v$ à l'ensemble $D$
+    
+    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$
+    
+    \textbf{Renvoyer} FAUX
+\end{minipage}}
+
+\vspace{2\baselineskip}
+
+Cet algorithme a une complexité $O(n\cdot m)$ car trouver un sommet de degré maximal, vérifier qu'un ensemble est dominant, créer une copie d'un graphe et supprimer des sommets dans un graphe peuvent tous se faire en $O(n\cdot m)$
+
+\subsection{Distance minimale entre les robots}
+
+\subsection{Gardien}
+
+\subsection{Position initiale des défenseurs}
+
 \section{Réduction vers SAT}
+
+\subsection{Extensions}
