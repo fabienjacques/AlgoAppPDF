@@ -3,10 +3,29 @@
 \subsection{Ensemble dominant}
 \label{def:ensemble_dominant}
 Un ensemble dominant d'un graphe $G(V, E)$ est un sous ensemble $D \subseteq V$ de sommets tel que tout sommet de $G$ est soit dans $D$ soit adjacent à un sommet de $D$.
+
 \subsection{Nombre de domination}
 \label{def:nombre_de_domination}
 Le nombre de domination $\gamma(G)$ d'un graphe $G$ est le cardinal d'un plus petit ensemble dominant de $G$.
+
 \subsection{Ensemble de sommets stable}
 \label{def:ensemble_de_sommets_stable}
 Soit $G(V, E)$ un graphe, un sous-ensemble $S \subseteq V$ de sommets est stable si aucune paire de sommets dans $S$ n'est reliée par une arête de $G$.
+
+\subsection{Problème SAT}
+\label{def:SAT}
+Le problème SAT ou problème de satisfaisabilité booléenne consiste à déterminer à partir d'une formule de logique propositionnelle(\ref{def:formule_de_logique_propositionnelle}) si il existe ou non une valuation des variables de la formule (une assignation de chacune des variables à VRAI ou FAUX) qui rend la formule vraie.
+
+\subsection{Formule de logique propositionnelle}
+\label{def:formule_de_logique_propositionnelle}
+Une formule de logique propositionnelle est constituée de variables booléennes (qui peuvent valoir VRAI ou FAUX), d'opérateurs $\vee$ (disjonction ou "ou"), $\wedge$ (conjonction ou "et") et $\neg$ (négation) et de parenthèses. Une telle formule peut être évaluée à VRAI ou FAUX pour une certaine assignation des variables de la formule en suivant certaines règles à appliquer aux opérateurs dans l'ordre défini par les parenthèses. Par exemple $\neg$ FAUX vaut VRAI, FAUX $\vee$ VRAI vaut VRAI...
+
+\subsection{Forme Normale Conjonctive}
+\label{def:forme_normale_conjonctive}
+Une formule de logique propositionnelle en forme normale conjonctive est constituée de conjonctions de disjonctions de littéraux.
+Autrement dit, une formule en FNC a la forme suivante :
+$$(l_{1,1} \vee l_{1,2} \vee \ldots \vee l_{1,k_1}) \wedge (l_{2,1} \vee l_{2,2} \vee \ldots \vee l_{1,k_2}) \wedge \ldots \wedge (l_{n,1} \vee l_{n,2} \vee \ldots \vee l_{n,k_n})$$
+
+Où les $l_{i, j}$ sont des littéraux ($x$ ou non $\neg x$ avec $x$ une variable).
+
 \end{appendix}
