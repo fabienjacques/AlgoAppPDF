@@ -102,16 +102,22 @@ On cherche ici à coder notre problème de domination par une formule de logique
     
     Cette formule porte sur les variables booléenne :
     \begin{itemize}
-        \item $x_i$ ($0 \leq i \leq |V_p|$) qui représentent le fait que le sommet $i$ appartient à l'ensemble dominant ou non.
-        \item $T_{g,i}$ ($1 \leq g \leq k$, $ 1 \leq i \leq |V_p|$) variables auxiliaires utilisées dans $\phi_2$
-        \item $B_{i, g}$ ($1\leq i \leq k$, $ 1 \leq g \leq \lceil log_2(|V_p|) \rceil$) variables auxiliaires utilisées dans $\phi_2$
+        \item $x_i$ \Big($0 \leq i \leq |V_p|$\Big) qui représentent le fait que le sommet $i$ appartient à l'ensemble dominant ou non.
+        \item $T_{i, j}$ \Big($1 \leq i \leq k$, $ 1 \leq j \leq |V_p|$\Big) variables auxiliaires utilisées dans $\phi_2$
+        \item $B_{i, j}$ \Big($1\leq i \leq k$, $ 1 \leq j \leq \lceil log_2(|V_p|) \rceil$\Big) variables auxiliaires utilisées dans $\phi_2$
     \end{itemize}
     
     $$\phi_1 = \bigwedge\limits_{t\in V_t} \Big(\bigvee\limits_{p\in N(t)} x_p \Big) $$
     
     $$\phi_2 = \bigwedge\limits_{i = 1}^n \left[  \Big(\neg x_i \vee T_{1, i} \vee T_{2, i} \vee ... \vee T_{k, i}\Big) \wedge \bigwedge\limits_{g = 1}^k \bigwedge\limits_{j = 1}^{\lceil log_2(|V_p|) \rceil} \Big( \neg T_{g,i} \vee \phi(i, g, j)\Big)\right]$$
     
+    Où $\phi(i, g, j)$ représente $B{g, j}$ si le $j$-ième bit de la représentation en binaire de l'entier $i$ avec $log_2(|V_p|)$ chiffres est un $1$ et $\neg B{g, j}$ sinon.
+    
 \end{minipage}}
+
+\vspace{2\baselineskip}
+
+La formule $\phi_1$ est de taille constante car elle contient dans le pire des cas $|V_p| ^{|V_t| \cdot K_{max}}$ littéraux. EXPLIQUER \newline
 
 La formule $\phi_2$ provient de l'article A COMPLETER
 
