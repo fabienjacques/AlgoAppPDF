@@ -147,7 +147,7 @@ Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de répar
     
     \textbf{Algorithme :}
     
-    Construire une copie $G'$ de $G$
+    Construire une copie $G'$ de $G$ \newline
     
     Choisir un sommet $v \in V_{ps}$ de degré maximal dans $G'$
     
@@ -212,9 +212,7 @@ On cherche ici à coder notre problème de domination par une formule de logique
     
     Où $\phi(i, g, j)$ représente $B{g, j}$ si le $j$-ième bit de la représentation en binaire de l'entier $i$ avec $\lceil log_2(|V_p|) \rceil$ chiffres est un $1$ et $\neg B{g, j}$ sinon.
     
-\end{minipage}}
-
-\vspace{2\baselineskip}
+\end{minipage}}\newline
 
 Le nombre de littéraux dans la formule $\phi_1$ est borné par $|V_p| ^{|V_t|}$  (dans le pire des cas, chaque sommet de tir est relié à tous les sommets de positions). Le nombre de sommets de tirs étant dans le pire des cas $6*K_{max}$, pour un $K_max$ fixé, $\phi_1$ est de taille polynomiale. \newline
 
