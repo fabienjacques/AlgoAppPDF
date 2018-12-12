@@ -143,7 +143,7 @@ Le graphe du problème devient alors:\\ \bigbreak
 \end{figure}
 
 \subsection{Gardien}
-Pour modéliser le fait qu'une zone du terrain est réservée à un gardien, on divise les sommets de position en deux : Les sommets de positions terrain et les sommets de position surface de réparation. Une solution du problème deviendra donc un ensemble composés de sommets de positions terrain et d'un seul sommet de position surface de réparation qui domine les sommets de tirs.
+Pour modéliser le fait qu'une zone du terrain est réservée à un gardien, on divise les sommets de position en deux : Les sommets de positions terrain $V_{pt}$ et les sommets de position surface de réparation $V_{ps}$ avec $V_p = V_{pt} \cup V_{ps}$  Une solution du problème deviendra donc un ensemble composés de sommets de positions terrain et d'un seul sommet de position surface de réparation qui domine les sommets de tirs.
 
 \subsection{Trajectoires courbes}
 Pour prendre en compte les trajectoires courbes, il suffit de modifier la fonction $interception()$. Cette extension augmentera juste le nombre d'arêtes entre les sommets de tirs et les sommets de position.

@@ -4,22 +4,20 @@ On a désormais un graphe dont on veut dominer les sommets de tir à l'aide des 
 
 \section{Force brute}
 
-La premier algorithme que nous avons implémenté est un algorithme de force brute. L'idée est d'essayer exhaustivement tous les sous-ensembles possibles de sommets défenseurs pour en trouver un de taille minimale qui domine les sommets de position. Pour être certain de trouver un sous-ensemble de taille minimale, on commence par essayer tous les sous-ensembles de taille 0, puis 1, puis 2, jusqu'à 6. Si on ne trouve pas d'ensemble dominant durant ce procédé c'est qu'il n'existe pas de solution au problème.
+La premier algorithme que nous avons implémenté est un algorithme de force brute. L'idée est d'essayer exhaustivement tous les sous-ensembles possibles de sommets défenseurs pour en trouver un de taille minimale qui domine les sommets de position. Pour être certain de trouver un sous-ensemble de taille minimale, on commence par essayer tous les sous-ensembles de taille 0, puis 1, puis 2, jusqu'à 6. Si on ne trouve pas d'ensemble dominant durant ce procédé c'est qu'il n'existe pas de solution au problème.\newline\newline
 
-\vspace{2\baselineskip}
-
-\fbox{\begin{minipage}{0.9\textwidth}
+\fbox{\begin{minipage}{\textwidth}
     \centerline{\textbf{Force Brute}}\vspace{\baselineskip}
     
     \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
     
-    \textbf{Sortie : }Un ensemble $D \in V_p$ de taille minimale qui domine $V_t$ ou FAUX si un tel ensemble de taille inférieure à 7 n'existe pas. \vspace{\baselineskip}
+    \textbf{Sortie : }Un ensemble $D \subseteq V_p$ de taille minimale qui domine $V_t$ ou FAUX si un tel ensemble de taille inférieure à 7 n'existe pas. \vspace{\baselineskip}
     
     \textbf{Algorithme :}
     
     \textbf{Pour} $i$ allant de $0$ à $6$ :
     
-    \qquad \textbf{Pour} tout $D \in V_p$ avec $|D| = i$ :
+    \qquad \textbf{Pour} tout $D \subseteq V_p$ avec $|D| = i$ :
     
     \qquad\qquad \textbf{Si} $D$ domine $V_t$ : \textbf{Renvoyer} D \vspace{\baselineskip}
     
@@ -30,7 +28,49 @@ Cet algorithme a une complexité exponentielle pour le nombre de sommets du grap
 
 \subsection{Distance minimale entre les robots}
 
+Pour cette extension, il faut que l'ensemble dominant renvoyé soit également un ensemble indépendant. \newline
+
+\fbox{\begin{minipage}{\textwidth}
+    \centerline{\textbf{Force Brute : Distance minimale entre les robots}}\vspace{\baselineskip}
+    
+    \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
+    
+    \textbf{Sortie : }Un ensemble $D \subseteq V_p$ de taille minimale qui domine $V_t$ ou FAUX si un tel ensemble de taille inférieure à 7 n'existe pas. \vspace{\baselineskip}
+    
+    \textbf{Algorithme :}
+    
+    \textbf{Pour} $i$ allant de $0$ à $6$ :
+    
+    \qquad \textbf{Pour} tout $D \subseteq V_p$ avec $|D| = i$ :
+    
+    \qquad\qquad \textbf{Si} $D$ domine $V_t$ et $D$ indépendant : \textbf{Renvoyer} D \vspace{\baselineskip}
+    
+    \textbf{Renvoyer} FAUX
+\end{minipage}}
+
+
+
 \subsection{Gardien}
+
+Pour cette extension, il faut qu'exactement un défenseur se trouve sur la surface de réparation et que les autres se trouvent sur le reste du terrain.\newline
+
+\fbox{\begin{minipage}{\textwidth}
+    \centerline{\textbf{Force Brute : Gardien}}\vspace{\baselineskip}
+    
+    \textbf{Entrées : }Un graphe $G = (V = V_t \cup (V_p = V_{pt} \cup V_{ps}), E)$
+    
+    \textbf{Sortie : }Un ensemble $D \subseteq V_p$ avec un sommet dans $V_{ps}$ de taille minimale qui domine $V_t$ ou FAUX si un tel ensemble de taille inférieure à 7 n'existe pas. \vspace{\baselineskip}
+    
+    \textbf{Algorithme :}
+    
+    \textbf{Pour} $i$ allant de $0$ à $6$ :
+    
+    \qquad \textbf{Pour} tout $D = \{g\} \cup d$ avec $g \in V_{ps}$, $d \subseteq V_{pt}$ et $|D| = i$ :
+    
+    \qquad\qquad \textbf{Si} $D$ domine $V_t$ : \textbf{Renvoyer} D \vspace{\baselineskip}
+    
+    \textbf{Renvoyer} FAUX
+\end{minipage}}
 
 \subsection{Position initiale des défenseurs}
 
@@ -38,16 +78,14 @@ Cet algorithme a une complexité exponentielle pour le nombre de sommets du grap
 
 \section{Méthode gloutonne}
 
-Avec cette méthode il est possible d'obtenir une solution avec un nombre de défenseur raisonnablement petit (mais pas minimal) en temps polynomial.
+Avec cette méthode il est possible d'obtenir une solution avec un nombre de défenseur raisonnablement petit (mais pas minimal) en temps polynomial.\newline
 
-\vspace{2\baselineskip}
-
-\fbox{\begin{minipage}{0.9\textwidth}
-    \centerline{\textbf{Force Brute}}\vspace{\baselineskip}
+\fbox{\begin{minipage}{\textwidth}
+    \centerline{\textbf{Méthode Gloutonne}}\vspace{\baselineskip}
     
     \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
     
-    \textbf{Sortie : }Un ensemble $D \in V_p$ qui domine $V_t$ ou FAUX si l'algorithme n'arrive pas à trouver un tel ensemble de taille inférieure à 7. \vspace{\baselineskip}
+    \textbf{Sortie : }Un ensemble $D \subseteq V_p$ qui domine $V_t$ ou FAUX si l'algorithme n'arrive pas à trouver un tel ensemble de taille inférieure à 7. \vspace{\baselineskip}
     
     \textbf{Algorithme :}
     
@@ -61,7 +99,7 @@ Avec cette méthode il est possible d'obtenir une solution avec un nombre de dé
     
     \qquad Ajouter $v$ à l'ensemble $D$
     
-    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$
+    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
     
     \textbf{Renvoyer} FAUX
 \end{minipage}}
@@ -71,8 +109,64 @@ Avec cette méthode il est possible d'obtenir une solution avec un nombre de dé
 Cet algorithme a une complexité $O(n\cdot m)$ car trouver un sommet de degré maximal, vérifier qu'un ensemble est dominant, créer une copie d'un graphe et supprimer des sommets dans un graphe peuvent tous se faire en $O(n\cdot m)$
 
 \subsection{Distance minimale entre les robots}
+Pour cette extension il faut s'assurer de ne pas prendre de sommet de position relié à un sommet déjà dans la solution. Pour cela, à chaque étape on supprime du graphe les voisins du sommet choisi.\newline
+
+\fbox{\begin{minipage}{\textwidth}
+    \centerline{\textbf{Méthode Gloutonne : Distance minimale entre les robots}}\vspace{\baselineskip}
+    
+    \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
+    
+    \textbf{Sortie : }Un ensemble $D \subseteq V_p$ qui domine $V_t$ ou FAUX si l'algorithme n'arrive pas à trouver un tel ensemble de taille inférieure à 7. \vspace{\baselineskip}
+    
+    \textbf{Algorithme :}
+    
+    Construire une copie $G'$ de $G$
+    
+    \textbf{Pour} $i$ allant de $0$ à $6$ :
+    
+    \qquad Choisir un sommet $v \in V_p$ de degré maximal dans $G'$
+    
+    \qquad Supprimer de $G'$ $v$ et tous les sommets reliés à $v$ 
+    
+    \qquad Ajouter $v$ à l'ensemble $D$
+    
+    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
+    
+    \textbf{Renvoyer} FAUX
+\end{minipage}}
 
 \subsection{Gardien}
+Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de réparation, on commence par choisir un sommet de $V_{ps}$ puis on supprime tous les sommets de position de surface de réparation du graphe.\newline
+
+\fbox{\begin{minipage}{\textwidth}
+    \centerline{\textbf{Méthode Gloutonne : Gardien}}\vspace{\baselineskip}
+    
+    \textbf{Entrées : } Un graphe $G = (V = V_t \cup (V_p = V_{pt} \cup V_{ps}), E)$
+    
+    \textbf{Sortie : }Un ensemble $D \subseteq V_p$ qui domine $V_t$ ou FAUX si l'algorithme n'arrive pas à trouver un tel ensemble de taille inférieure à 7. \vspace{\baselineskip}
+    
+    \textbf{Algorithme :}
+    
+    Construire une copie $G'$ de $G$
+    
+    Choisir un sommet $v \in V_{ps}$ de degré maximal dans $G'$
+    Supprimer de $G'$ v et tous les sommets de tir reliés à $v$
+    Supprimer de $G'$ les sommets de $V_{ps}$
+    Ajouter $v$ à l'ensemble $D$
+    
+    \textbf{Pour} $i$ allant de $2$ à $6$ :
+    
+    \qquad Choisir un sommet $v \in V_p$ de degré maximal dans $G'$
+    
+    \qquad Supprimer de $G'$ $v$ et tous les sommets de tir reliés à $v$  
+    
+    \qquad Ajouter $v$ à l'ensemble $D$
+    
+    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
+    
+    \textbf{Renvoyer} FAUX
+\end{minipage}}
+
 
 \subsection{Position initiale des défenseurs}
 
