@@ -99,7 +99,7 @@ Avec cette méthode il est possible d'obtenir une solution avec un nombre de dé
     
     \qquad Ajouter $v$ à l'ensemble $D$
     
-    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
+    \qquad \textbf{Si} $D$ domine $V_t$ dans $G$ : \textbf{Renvoyer} $D$\newline
     
     \textbf{Renvoyer} FAUX
 \end{minipage}}
@@ -130,7 +130,7 @@ Pour cette extension il faut s'assurer de ne pas prendre de sommet de position r
     
     \qquad Ajouter $v$ à l'ensemble $D$
     
-    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
+    \qquad \textbf{Si} $D$ domine $V_t$ dans $G$ : \textbf{Renvoyer} $D$\newline
     
     \textbf{Renvoyer} FAUX
 \end{minipage}}
@@ -150,9 +150,14 @@ Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de répar
     Construire une copie $G'$ de $G$
     
     Choisir un sommet $v \in V_{ps}$ de degré maximal dans $G'$
+    
     Supprimer de $G'$ v et tous les sommets de tir reliés à $v$
+    
     Supprimer de $G'$ les sommets de $V_{ps}$
+    
     Ajouter $v$ à l'ensemble $D$
+    
+    \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
     
     \textbf{Pour} $i$ allant de $2$ à $6$ :
     
@@ -162,7 +167,7 @@ Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de répar
     
     \qquad Ajouter $v$ à l'ensemble $D$
     
-    \qquad \textbf{Si} $D$ domine $V_p$ dans $G$ : \textbf{Renvoyer} $D$\newline
+    \qquad \textbf{Si} $D$ domine $V_t$ dans $G$ : \textbf{Renvoyer} $D$\newline
     
     \textbf{Renvoyer} FAUX
 \end{minipage}}
