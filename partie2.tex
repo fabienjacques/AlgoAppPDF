@@ -111,17 +111,17 @@ On cherche ici à coder notre problème de domination par une formule de logique
     
     $$\phi_2 = \bigwedge\limits_{i = 1}^n \left[  \Big(\neg x_i \vee T_{1, i} \vee T_{2, i} \vee ... \vee T_{k, i}\Big) \wedge \bigwedge\limits_{g = 1}^k \bigwedge\limits_{j = 1}^{\lceil log_2(|V_p|) \rceil} \Big( \neg T_{g,i} \vee \phi(i, g, j)\Big)\right]$$
     
-    Où $\phi(i, g, j)$ représente $B{g, j}$ si le $j$-ième bit de la représentation en binaire de l'entier $i$ avec $log_2(|V_p|)$ chiffres est un $1$ et $\neg B{g, j}$ sinon.
+    Où $\phi(i, g, j)$ représente $B{g, j}$ si le $j$-ième bit de la représentation en binaire de l'entier $i$ avec $\lceil log_2(|V_p|) \rceil$ chiffres est un $1$ et $\neg B{g, j}$ sinon.
     
 \end{minipage}}
 
 \vspace{2\baselineskip}
 
-La formule $\phi_1$ est de taille constante car elle contient dans le pire des cas $|V_p| ^{|V_t| \cdot K_{max}}$ littéraux. EXPLIQUER \newline
+Le nombre de littéraux dans la formule $\phi_1$ est borné par $|V_p| ^{|V_t|}$  (dans le pire des cas, chaque sommet de tir est relié à tous les sommets de positions). Le nombre de sommets de tirs étant dans le pire des cas $6*K_{max}$, pour un $K_max$ fixé, $\phi_1$ est de taille polynomiale. \newline
 
-La formule $\phi_2$ provient de l'article A COMPLETER
+La formule $\phi_2$ provient de l'article \cite{FG10}. Elle a une taille en $O\Big(k\cdot |V_p| \cdot log_2(|V_p|)\Big)$ et elle introduit  $O\Big(k \cdot |V_p| \Big)$ nouvelles variables.
 
-\vspace{2\baselineskip}
+Cette réduction est donc FPT pour le nombre de sommets en fixant $K_{max}$ (et donc en fixant $\theta_{step}$).
 
 
 \subsection{Extensions}
