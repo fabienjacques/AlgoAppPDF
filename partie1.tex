@@ -89,7 +89,7 @@ Avec plus de buts, il y a plus de tirs bien cadrés possibles. Cela augmente don
 
 \subsection{Position initiale des défenseurs}
 Une solution possible pour modéliser cette extension est de À COMPLÉTER
-
+%Proposition de texte : Le problème ici n'est plus seulement un problème de décision mais aussi d'optimisation. Nos défenseurs ont des coordonnées d'origine (positions initiale) et on doit trouver une solution du problème qui minimise la mise en place des défenseurs (minimiser le trajet de la position initiale vers position d'interception de tir). Dans notre cas, parmi toutes les solutions d'un problème (ensemble d'ensemble dominants), on veut sélectionner celui qui minimise la distance du défenseur le plus éloigné de sa position d'interception. En outre, on choisi la solution qui met en place tous les défenseurs le plus vite possible.
 \subsection{Distance minimale entre les robots}
 Si on veut éviter d'avoir des robots qui rentrent en collision, on peut ajouter une arête entre chaque paire de sommets de position qui ont des positions inférieures à une certaine distance. Une solution du problème doit alors avoir comme condition supplémentaire d'être un ensemble de sommets stable (\ref{def:ensemble_de_sommets_stable}).\\
 Le graphe du problème devient alors:\\ \bigbreak
@@ -145,5 +145,6 @@ Le graphe du problème devient alors:\\ \bigbreak
 \subsection{Gardien}
 Pour modéliser le fait qu'une zone du terrain est réservée à un gardien, on divise les sommets de position en deux : Les sommets de positions terrain $V_{pt}$ et les sommets de position surface de réparation $V_{ps}$ avec $V_p = V_{pt} \cup V_{ps}$  Une solution du problème deviendra donc un ensemble composés de sommets de positions terrain et d'un seul sommet de position surface de réparation qui domine les sommets de tirs.
 
-\subsection{Trajectoires courbes}
-Pour prendre en compte les trajectoires courbes, il suffit de modifier la fonction $interception()$. Cette extension augmentera juste le nombre d'arêtes entre les sommets de tirs et les sommets de position.
+\section{Limites du modèle}
+
+À COMPLÉTER

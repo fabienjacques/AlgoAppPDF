@@ -74,6 +74,7 @@ Pour cette extension, il faut qu'exactement un défenseur se trouve sur la surfa
 
 \subsection{Position initiale des défenseurs}
 
+À COMPLÉTER
 
 
 \section{Méthode gloutonne}
@@ -175,6 +176,8 @@ Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de répar
 
 \subsection{Position initiale des défenseurs}
 
+À COMPLÉTER
+
 \section{Réduction vers SAT}
 
 La troisième méthode que nous avons utilisé pour résoudre notre problème est une réduction vers le problème SAT(\ref{def:SAT}). Une fois une instance du problème de domination transformée en instance de SAT, il est possible d'utiliser un solveur SAT pour trouver une solution à ce nouveau problème puis de retransformer cette solution en une solution du problème d'origine.\newline 
@@ -214,11 +217,8 @@ On cherche ici à coder notre problème de domination par une formule de logique
     
 \end{minipage}}\newline
 
-Le nombre de littéraux dans la formule $\phi_1$ est borné par $|V_p| ^{|V_t|}$  (dans le pire des cas, chaque sommet de tir est relié à tous les sommets de positions). Le nombre de sommets de tirs étant dans le pire des cas $6*K_{max}$, pour un $K_max$ fixé, $\phi_1$ est de taille polynomiale. \newline
+Le nombre de littéraux dans la formule $\phi_1$ est borné par $|V_p| ^{|V_t|}$  (dans le pire des cas, chaque sommet de tir est relié à tous les sommets de positions). Le nombre de sommets de tirs étant dans le pire des cas $6*K_{max}$, pour un $K_{max}$ fixé, $\phi_1$ est de taille polynomiale. \newline
 
 La formule $\phi_2$ provient de l'article \cite{FG10}. Elle a une taille en $O\Big(k\cdot |V_p| \cdot log_2(|V_p|)\Big)$ et elle introduit  $O\Big(k \cdot |V_p| \Big)$ nouvelles variables.
 
 Cette réduction est donc FPT pour le nombre de sommets en fixant $K_{max}$ (et donc en fixant $\theta_{step}$).
-
-
-\subsection{Extensions}
