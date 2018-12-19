@@ -88,8 +88,9 @@ Comme nous sommes limités à 6 robots, nous chercherons des ensemble dominant d
 Avec plus de buts, il y a plus de tirs bien cadrés possibles. Cela augmente donc le nombre de sommets de tirs. Il faut modifier la fonction $cadre()$ pour gérer cette extension.
 
 \subsection{Position initiale des défenseurs}
-Une solution possible pour modéliser cette extension est de À COMPLÉTER
-%Proposition de texte : Le problème ici n'est plus seulement un problème de décision mais aussi d'optimisation. Nos défenseurs ont des coordonnées d'origine (positions initiale) et on doit trouver une solution du problème qui minimise la mise en place des défenseurs (minimiser le trajet de la position initiale vers position d'interception de tir). Dans notre cas, parmi toutes les solutions d'un problème (ensemble d'ensemble dominants), on veut sélectionner celui qui minimise la distance du défenseur le plus éloigné de sa position d'interception. En outre, on choisi la solution qui met en place tous les défenseurs le plus vite possible.
+
+Nos défenseurs ont désormais des coordonnées d'origine (positions initiale) et une solution du problème est une position à atteindre pour chacun des défenseurs. Une solution optimale sera une solution qui permet d'arrêter tous les tirs et qui minimise la distance maximale entre la position initiale d'un défenseur et sa position à atteindre.
+
 \subsection{Distance minimale entre les robots}
 Si on veut éviter d'avoir des robots qui rentrent en collision, on peut ajouter une arête entre chaque paire de sommets de position qui ont des positions inférieures à une certaine distance. Une solution du problème doit alors avoir comme condition supplémentaire d'être un ensemble de sommets stable (\ref{def:ensemble_de_sommets_stable}).\\
 Le graphe du problème devient alors:\\ \bigbreak
@@ -147,4 +148,11 @@ Pour modéliser le fait qu'une zone du terrain est réservée à un gardien, on 
 
 \section{Limites du modèle}
 
-À COMPLÉTER
+Ce modèle possède l'avantage de ramener le problème de placement des défenseurs à un problème bien connu, le problème de domination. Cependant, ce modèle est une simplification de la réalité. Voici une liste non-exhaustive des raisons pour lesquels ce modèle est une représentation imparfaite de la réalité :
+
+\begin{itemize}
+    \item Chaque attaquant peut tirer en direction des cages. Dans la réalité, seul un attaquant possédant la balle pourrait tirer.
+    \item Le vitesse de déplacement de la balle n'est pas pris en compte, dans notre modèle le tir est instantané. Dans la réalité, un défenseur mal placé selon notre modèle pourrait quand même arrêter la balle en se déplaçant sur sa trajectoire avant qu'elle n'arrive dans les cages.
+    \item La balle est considérée comme un point sans diamètre.
+    \item La trajectoire des attaquants n'est pas prise en compte, seulement leur position actuelle.
+\end{itemize}
