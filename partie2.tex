@@ -26,12 +26,12 @@ La premier algorithme que nous avons implémenté est un algorithme de force bru
 \bigbreak
 Cet algorithme a une complexité exponentielle pour le nombre de sommets du graphes. En effet, le nombre de sous-ensembles de taille $k$ d'un ensemble à $n$ éléments est exponentiel en $n$.
 
-\subsection{Distance minimale entre les robots}
+\subsection{Collisions}
 
 Pour cette extension, il faut que l'ensemble dominant renvoyé soit également un ensemble indépendant. \newline
 
 \fbox{\begin{minipage}{\textwidth}
-    \centerline{\textbf{Force Brute : Distance minimale entre les robots}}\vspace{\baselineskip}
+    \centerline{\textbf{Force Brute : Collisions entre les robots}}\vspace{\baselineskip}
     
     \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
     
@@ -75,9 +75,9 @@ Pour cette extension, il faut qu'exactement un défenseur se trouve sur la surfa
 
 
 
-
+\newpage
 \subsection{Positions initiales des défenseurs}
-Dans cette extension le nombre de défenseur nous est donné ainsi que la position initiale de chacun d'entre eux. Il nous faut trouver un ensemble de positions valide (qui permet d'arrêter tous les tirs) qui minimise la distance maximum parcourue par les joueurs en partant de leur position initiale.
+Dans cette extension le nombre de défenseur nous est donné ainsi que la position initiale de chacun d'entre eux. Il nous faut trouver un ensemble de positions valide (qui permet d'arrêter tous les tirs) qui minimise la distance maximum parcourue par les joueurs en partant de leur position initiale. \newline
 
 \fbox{\begin{minipage}{\textwidth}
 		\centerline{\textbf{Force Brute : Positions initiales des défenseurs}}\vspace{\baselineskip}
@@ -109,6 +109,7 @@ Dans cette extension le nombre de défenseur nous est donné ainsi que la positi
 \bigbreak
 L'on test ici de manière exhaustive toutes les possibilité d'ensemble dominant $V_t$, ainsi que toutes les permutations possibles pour chaque ensemble. On en déduit l'ensemble dominant ainsi que les positions minimisant la distance maximum parcourue par les défenseurs.
 
+\newpage
 \section{Méthode gloutonne}
 
 Avec cette méthode il est possible d'obtenir une solution avec un nombre de défenseur raisonnablement petit (mais pas minimal) en temps polynomial.\newline
@@ -135,20 +136,16 @@ Avec cette méthode il est possible d'obtenir une solution avec un nombre de dé
     \qquad \textbf{Si} $D$ domine $V_t$ dans $G$ : \textbf{Renvoyer} $D$\newline
     
     \textbf{Renvoyer} FAUX
-\end{minipage}}
-
-
-
-
-\vspace{2\baselineskip}
+\end{minipage}}\newline
 
 Cet algorithme a une complexité $O(n\cdot m)$ car trouver un sommet de degré maximal, vérifier qu'un ensemble est dominant, créer une copie d'un graphe et supprimer des sommets dans un graphe peuvent tous se faire en $O(n\cdot m)$
 
-\subsection{Distance minimale entre les robots}
+\newpage
+\subsection{Collisions}
 Pour cette extension il faut s'assurer de ne pas prendre de sommet de position relié à un sommet déjà dans la solution. Pour cela, à chaque étape on supprime du graphe les voisins du sommet choisi.\newline
 
 \fbox{\begin{minipage}{\textwidth}
-    \centerline{\textbf{Méthode Gloutonne : Distance minimale entre les robots}}\vspace{\baselineskip}
+    \centerline{\textbf{Méthode Gloutonne : Collisions entre les robots}}\vspace{\baselineskip}
     
     \textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p, E)$
     
@@ -171,6 +168,7 @@ Pour cette extension il faut s'assurer de ne pas prendre de sommet de position r
     \textbf{Renvoyer} FAUX
 \end{minipage}}
 
+\newpage
 \subsection{Gardien}
 Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de réparation, on commence par choisir un sommet de $V_{ps}$ puis on supprime tous les sommets de position de surface de réparation du graphe.\newline
 
@@ -283,7 +281,7 @@ On cherche ici à coder notre problème de domination par une formule de logique
     
 \end{minipage}}\newline
 
-Le nombre de littéraux dans la formule $\phi_1$ est borné par $|V_p| ^{|V_t|}$  (dans le pire des cas, chaque sommet de tir est relié à tous les sommets de positions). Le nombre de sommets de tirs étant dans le pire des cas $6*K_{max}$, pour un $K_{max}$ fixé, $\phi_1$ est de taille polynomiale. \newline
+Le nombre de littéraux dans la formule $\phi_1$ est borné par $|V_p| ^{|V_t|}$  (dans le pire des cas, chaque sommet de tir est relié à tous les sommets de positions). Le nombre de sommets de tirs étant dans le pire des cas $6*K_{max}$, pour un $K_{max}$ fixé, $\phi_1$ est de taille polynomiale.
 
 La formule $\phi_2$ provient de l'article \cite{FG10}. Elle a une taille en $O\Big(k\cdot |V_p| \cdot log_2(|V_p|)\Big)$ et elle introduit  $O\Big(k \cdot |V_p| \Big)$ nouvelles variables.
 
