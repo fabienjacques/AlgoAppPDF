@@ -23,7 +23,7 @@ La premier algorithme que nous avons implémenté est un algorithme de force bru
     
     \textbf{Renvoyer} FAUX
 \end{minipage}}
-
+\bigbreak
 Cet algorithme a une complexité exponentielle pour le nombre de sommets du graphes. En effet, le nombre de sous-ensembles de taille $k$ d'un ensemble à $n$ éléments est exponentiel en $n$.
 
 \subsection{Distance minimale entre les robots}
@@ -72,10 +72,42 @@ Pour cette extension, il faut qu'exactement un défenseur se trouve sur la surfa
     \textbf{Renvoyer} FAUX
 \end{minipage}}
 
-\subsection{Position initiale des défenseurs}
 
-À COMPLÉTER
 
+
+
+\subsection{Positions initiales des défenseurs}
+Dans cette extension le nombre de défenseur nous est donné ainsi que la position initiale de chacun d'entre eux. Il nous faut trouver un ensemble de positions valide (qui permet d'arrêter tous les tirs) qui minimise la distance maximum parcourue par les joueurs en partant de leur position initiale.
+
+\fbox{\begin{minipage}{\textwidth}
+		\centerline{\textbf{Force Brute : Positions initiales des défenseurs}}\vspace{\baselineskip}
+		
+		\textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p , E)$, $V_{init}\subseteq V_p$
+		
+		\textbf{Sortie : }Un tuple $D \subseteq V_p$  avec un sommet de taille égale à $|V_{init}|$ qui domine $V_t$ tel que $D$ minimise $N_\infty(V_{init},D)$ pour les $D$ dominant $V_t$ tel que $|D|=|V_{init}|$
+		
+		\textbf{Algorithme :}
+		
+		 $Liste\_Dominant := \emptyset$
+		
+		 \textbf{Pour} tout $D_i\subseteq V_t$ tel que $|D|=|V_{init}|$
+		
+		\qquad \textbf{Si} $D$ domine $V_t$ : Ajouter $D_i$ à $Liste\_Dominant$.
+		
+		 $D := premierElement(Liste\_Dominant)$.
+		
+		 \textbf{Si} $Liste\_Dominant = \emptyset$ : \textbf{Renvoyer} FAUX
+		
+		\textbf{Pour} tout $D_i\in Liste\_Dominant$
+		
+		\qquad\textbf{Pour} toutes les permutations $\sigma_j\ de\ D_i$
+		
+		\qquad\qquad\textbf{Si} $N_\infty(V_{init},D_{i,\sigma_j})<N_\infty(V_{init},D)$ : $D:=D_{i,\sigma_j}$.
+		
+		\textbf{Renvoyer} D
+\end{minipage}}
+\bigbreak
+L'on test ici de manière exhaustive toutes les possibilité d'ensemble dominant $V_t$, ainsi que toutes les permutations possibles pour chaque ensemble. On en déduit l'ensemble dominant ainsi que les positions minimisant la distance maximum parcourue par les défenseurs.
 
 \section{Méthode gloutonne}
 
@@ -104,6 +136,9 @@ Avec cette méthode il est possible d'obtenir une solution avec un nombre de dé
     
     \textbf{Renvoyer} FAUX
 \end{minipage}}
+
+
+
 
 \vspace{2\baselineskip}
 
@@ -176,7 +211,38 @@ Pour s'assurer d'avoir exactement $1$ défenseur placé sur la surface de répar
 
 \subsection{Position initiale des défenseurs}
 
-À COMPLÉTER
+\fbox{\begin{minipage}{\textwidth}
+		\centerline{\textbf{Méthode gloutonne : Positions initiales des défenseurs}}\vspace{\baselineskip}
+		
+		\textbf{Entrées : }Un graphe $G = (V = V_t \cup V_p , E)$, $V_{init}\subseteq V_p$
+		
+		\textbf{Sortie : }Un tuple $D \subseteq V_p$  avec un sommet de taille égale à $|V_{init}|$ qui domine $V_t$ tel que $D$ minimise $N_\infty(V_{init},D)$ pour les $D$ dominant $V_t$ tel que $|D|=|V_{init}|$
+		
+		\textbf{Algorithme :}
+		
+  		Construire une copie $G'$ de $G$
+  		
+		\textbf{Pour} $i$ allant de $0$ à $6$ :
+		
+		\qquad Choisir un sommet $v \in V_p$ de degré maximal dans $G'$
+		
+		\qquad Supprimer de $G'$ $v$ et tous les sommets de tir reliés à $v$ 
+		
+		\qquad Ajouter $v$ à l'ensemble $D_0$
+		
+		\qquad \textbf{Si} $D_0$ ne domine pas $V_t$ dans $G$ : \textbf{Renvoyer} FAUX \newline
+		
+		$D=D_0$
+		
+		\textbf{Pour} toutes les permutations $\sigma_j\ de\ D_0$
+		
+		\qquad\qquad\textbf{Si} $N_\infty(V_{init},D_{0,\sigma_j})<N_\infty(V_{init},D)$ : $D:=D_{0,\sigma_j}$.
+		
+		\textbf{Renvoyer} D
+\end{minipage}
+}
+\bigbreak
+La méthode gloutonne pour le problème avec des défenseurs ayant une position initiale calcul de façon gloutonne un ensemble dominant $V_t$ de taille égale au nombre de défenseurs initiaux. Cependant, le choix de la permutation pour minimiser la distance maximum parcourue par les défenseur est elle sélectionnée via une méthode force brute.
 
 \section{Réduction vers SAT}
 
