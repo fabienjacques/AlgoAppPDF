@@ -8,16 +8,16 @@ Les entrées de notre problème sont des informations sur les robots et le terra
 
 Soient :
 \begin{itemize}
-\item $o_i \in O$ ($i \in \{1,..., n\}$) Les $n$ adversaires. On notera $o_i.x$ et $o_i.y$ les coordonnées de $o_i$.
-\item $d_i \in D$ ($i \in \{1,..., k\}$) Les $m$ défenseurs.
-\item $\theta_{step}$ Pas de discrétisation pour les angles de tirs. On considérera "l'angle $k$" comme étant un angle de mesure $k \cdot \theta_{step}$ radians. On nommera $K_{max}$ le plus grand angle possible, c'est à dire :  $\left \lfloor{\frac{2\cdot p \cdot i }{\theta_{step}}}\right \rfloor $
-\item $pos_{step}$, $X_{min}$, $X_{max}$, $Y_{min}$, $Y_{max}$, Pas de discrétisation pour les positions sur le terrain, Abscisses et Ordonnées minimales et maximales.
+\item $o_i \in O$ ($i \in \{1,..., n\}$) les $n$ adversaires. On notera $o_i.x$ et $o_i.y$ les coordonnées de $o_i$.
+\item $d_i \in D$ ($i \in \{1,..., k\}$) les $m$ défenseurs.
+\item $\theta_{step}$ le pas de discrétisation pour les angles de tirs. On considérera "l'angle $k$" comme étant un angle de mesure $k \cdot \theta_{step}$ radians. On nommera $K_{max}$ le plus grand angle possible, c'est à dire :  $\left \lfloor{\frac{2\cdot p \cdot i }{\theta_{step}}}\right \rfloor $
+\item $pos_{step}$, $X_{min}$, $X_{max}$, $Y_{min}$, $Y_{max}$, le pas de discrétisation pour les positions sur le terrain, l'abscisses et l'ordonnées minimales et maximales.
 \end{itemize}
 
 \section{Fonctions nécessaires}
 \begin{itemize}
-\item $cadre(x, y, k)$ ($x, y, k \in N$) Fonction qui renvoie vrai si le tir d'un attaquant aux coordonnées $(x, y)$ d'angle $k$ est bien cadré et faux sinon.
-\item $interception(x, y, k, x', y')$ Fonction qui renvoie vrai si le tir d'un attaquant en (x, y) d'angle k est arrêté par un défenseur en (x', y') et faux sinon.
+\item $cadre(x, y, k)$ ($x, y, k \in N$) la fonction qui renvoie vrai si le tir d'un attaquant aux coordonnées $(x, y)$ d'angle $k$ est bien cadré et faux sinon.
+\item $interception(x, y, k, x', y')$ la fonction qui renvoie vrai si le tir d'un attaquant en $(x, y)$ d'angle $k$ est arrêté par un défenseur en $(x', y')$ et faux sinon.
 \end{itemize}
 \space
 \space
@@ -60,12 +60,12 @@ On crée le graphe G suivant :\\
 \caption{Exemple de modélisation avec 3 tirs: ici \{($x_6,y_6$), ($x_9,y_9$)\} est une solution.}
 \end{figure}
 \subsection{Sommets de tir}
-On représente chacun des tirs possibles par un sommet (i, k) représentant le tir d'angle k de l'attaquant i :
+On représente chacun des tirs possibles par un sommet $(i, k)$ représentant le tir d'angle k de l'attaquant i :
 \newline
 
 $\forall i \in \{1, ..., n\}$, $\forall k \in \{0, ..., K_{max} \}$
 
-Si $cadre(o_i.x, o_i.y, k)$ est vrai : on ajoute un sommet au graphe d'étiquette (i, k) qui représente un tir possible de l'attaquant $o_i$. \bigbreak
+Si $cadre(o_i.x, o_i.y, k)$ est vrai : on ajoute un sommet au graphe d'étiquette $(i, k)$ qui représente un tir possible de l'attaquant $o_i$. \bigbreak
 
 \subsection{Sommets de position}
 On représente chacune des positions possibles pour un défenseur par un sommet $(x, y)$.
@@ -76,7 +76,7 @@ Le fait qu'un robot doit se placer à une certaine positions sera représenté p
 
 $\forall x \in \{1, ..., X_{max}\}$ $\forall y \in \{1, ..., Y_{max}\}$ 
 
-Pour tout sommet d'étiquette (i, k) tel que $interception(o_i.x, o_i.y, k, x, y)$ : On crée un sommet d'étiquette (x, y) qui représente un défenseur placé en (x, y) si ce sommet n'existe pas déjà. Puis, on ajoute une arête entre $(i, k)$ et $(x, y)$ qui représente le fait qu'un défenseur placé en $(x, y)$ arrêterai le tir $(i, k)$.
+Pour tout sommet d'étiquette (i, k) tel que $interception(o_i.x, o_i.y, k, x, y)$ : On crée un sommet d'étiquette $(x, y)$ qui représente un défenseur placé en $(x, y)$ si ce sommet n'existe pas déjà. Puis, on ajoute une arête entre $(i, k)$ et $(x, y)$ qui représente le fait qu'un défenseur placé en $(x, y)$ arrêterai le tir $(i, k)$.
 
 \section{Solution du problème}
 Une solution du problème est un ensemble de taille minimale de sommets de position qui domine(\ref{def:ensemble_dominant}) l'ensemble des sommets de tir . Ceci est effectivement une solution car pour tout sommet de tir on a dans l'ensemble dominant un sommet de position adjacent. En plaçant un défenseur sur chacune des positions dans l'ensemble dominant, tous les tirs possibles des attaquants seront bloqués.
