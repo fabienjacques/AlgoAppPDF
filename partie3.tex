@@ -11,42 +11,41 @@ Le constructeur de la classe RGraph est capable de lire un fichier d'entrée jso
 
 \section{Utilisation}
 
-Pour utiliser l'application, compilez tous les fichiers sources dans \textit{robodef/src/main} avec les librairies externes (fichiers .jar) présents dans les dossiers \textit{robotdef/lib\_jgrapht} et \textit{robotdef/lib\_json}.
+Pour utiliser l'application, compilez tous les fichiers sources dans \textit{robodef/src/main} avec les librairies externes (fichiers .jar) présents dans les dossiers \textit{robotdef/lib\_jgrapht} et \textit{robotdef/lib\_json}. L'application nécessite Java 8 ou supérieure.
 
 Lorsque le programme est lancé, vous devez commencer par choisir un fichier au format JSON décrivant le problème dont vous voulez générer une solution (au moins un exemple pour chaque problème est disponible dans le dossier \textit{robotdef/problems}).  Vous devrez ensuite choisir le type de problème (extension) lié au fichier que vous venez de sélectionner.
 
 Le programme utilisera l'algorithme correspondant au type de problème que vous aurez renseigné, sans vérifier la structure du fichier JSON décrivant ce problème. L'utilisation d'un fichier non adapté au problème sélectionné pourrait ne pas donner d'erreur apparente, mais le résultat, s'il en sort un, n'aurait pas de sens.
 
-\subsection{Utilisation de SAT}
+\subsection{Réduction vers SAT}
 
-L'utilisation de l'algorithme SAT est différent des autres. Pour l'utiliser, il faut tout d'abord aller compiler le code C présent dans \textit{robotdef/glucose-syrup-4.1/simp} avec la commande \textit{make}.
+L'utilisation de l'algorithme de réduction vers SAT diffère des autres. Pour l'utiliser, il faut tout compiler glucose dans \textit{robotdef/glucose-syrup-4.1/simp} avec la commande \textit{make}.
 
-Une fois l'exécutable de glucose généré, vous pouvez lancer notre programme. L'utilisation de SAT ne fonctionne que pour les problèmes normaux (basic problems), il faut donc sélectionner un fichier décrivant un problème de ce type. 
+Une fois l'exécutable de glucose généré, vous pouvez lancer le programme JAVA. La réduction vers SAT ne fonctionne que pour les problèmes normaux sans extension (basic problems).
 
-Sélectionnez ensuite SAT comme 
-
+Sélectionnez ensuite SAT comme type de problème. Notre algorithme SAT ne gère pas les collisions. Que vous cochiez ou non "Collision" n'a pas d'importance.
 
 \section{Limitations}
 
-Toutes les extensions n'ont pas été implémentées avec toutes les méthodes. Il n'est pas possible d'utiliser deux extensions en même temps sauf distance minimale qui peut être utilisé en même temps que certaines extensions.
+Toutes les extensions n'ont pas été implémentées avec toutes les méthodes. Il n'est pas possible d'utiliser deux extensions en même temps sauf collisions qui peut être utilisé en même temps que certaines extensions.
 
 \begin{tabular}{| l | c | c | c | c |}
  \hline		
      & Sans Extension & Plusieurs Buts & Position Initiale & Gardien \\
    \hline 
-   Force Brute & 2 & 3 & 4 & 5\\
+   Force Brute & \cmark & \cmark & \cmark & \cmark\\
   \hline  
- Glouton & 2 & 3 & 4  & 5\\
+ Glouton & \cmark & \cmark & \cmark  & \cmark\\
  \hline  
- SAT & 2 & 3 & 4  & 5\\
+ SAT & \cmark & \xmark & \xmark  & \xmark\\
  \hline  
- Force Brute (Distance Minimale) & 2 & 3 & 4  & 5\\
+ Force Brute (collisions) & \cmark & \cmark & \cmark  & \cmark\\
  \hline  
- Glouton (Distance Minimale) & 2 & 3 & 4  & 5\\
+ Glouton (collisions) & \cmark & \cmark & \cmark & \cmark\\
  \hline 
- SAT (Distance Minimale) & 2 & 3 & 4  & 5\\
+ SAT (collisions) & \xmark & \xmark & \xmark  & \xmark\\
   \hline  
- \end{tabular}
+ \end{tabular}\newline
 
 Nous n'avons pas implémenté le fait de récupérer les positions des défenseurs à partir de la solution renvoyée par glucose. 
 
